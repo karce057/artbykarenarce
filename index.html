@@ -188,9 +188,13 @@ $('extra').onchange=function(){st.x=this.checked;render()};
 render();
 // Galería: agrega objetos {src, titulo, detalle}
 var GALLERY=[
- {src:'images/obra 1.jpg', t:'Retrato familia 2024 - Óleo 60x80'},
- {src:'images/obra 2.jpg', t:'Retrato niña con luz natural'},
- {src:'images/obra 3.jpg', t:'Pareja - Encargo privado'}
+ {src:'images/obra 1.jpg', t:'Mirada al interior - Óleo 100x60'},
+ {src:'images/obra 1-2.jpg', t:'Mirada al interior - Óleo 100x60'},
+ {src:'images/obra 2.jpg', t:'Beso por consumar - Óleo 70x100'},
+ {src:'images/obra 2-1.jpg', t:'Beso por consumar - Óleo 70x100'},
+ {src:'images/obra 3.jpg', t:'Virgen de Guadalupe - Óleo 40x60'}
+ {src:'images/obra 3-1.jpg', t:'Virgen de Guadalupe - Óleo 40x60'}
+ {src:'images/obra 3-3.jpg', t:'Virgen de Guadalupe - Óleo 40x60'}
 ];
 var h=['4/5','1/1','3/4','4/5','5/4','3/4'];
 $('gal').innerHTML=(GALLERY.length?GALLERY:h.map(function(a,n){return{ph:a,t:'Obra '+(n+1)}})).map(function(w){
