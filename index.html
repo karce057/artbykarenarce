@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Art By Karen Arce · Retratos al óleo por encargo</title>
+<meta name="description" content="Retratos al óleo y encargos artísticos pintados a mano por Karen Arce. Envíos nacionales e internacionales.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234a74e0'/%3E%3Cstop offset='1' stop-color='%238a5af0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23f6f5ff'/%3E%3Cg fill='none' stroke='url(%23g)' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke-width='3.2' d='M15 14 L14 50 M16 33 L30 15 M16 32 L31 51'/%3E%3Cpath stroke-width='1.2' d='M17 15 L16 49 M14 34 L28 16 M18 31 L33 50' opacity='.6'/%3E%3Cpath stroke-width='3.2' d='M36 51 L42 14 L48 38 L54 14 L56 51'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfbff;--paper:#fff;--ink:#12102b;--soft:#5d5b78;--line:#e3e1f2;--blue:#4a74e0;--violet:#8a5af0;--g:linear-gradient(100deg,#3f6ee8,#7b5cf0 60%,#b58cf5);--wa:#1f7a4d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0b1e;--paper:#161430;--ink:#f1f0ff;--soft:#a9a7c6;--line:#2b2850;--wa:#2f9a66}}
+:root[data-theme="dark"]{--bg:#0d0b1e;--paper:#161430;--ink:#f1f0ff;--soft:#a9a7c6;--line:#2b2850;--wa:#2f9a66}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Instrument Sans',system-ui,sans-serif;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400}
+.gt{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);font-weight:500}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px)}
+header .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px}
+.logo{display:inline-flex;flex-direction:column;line-height:.95;font-family:'Poppins',sans-serif;text-decoration:none;font-size:15px;width:max-content}
+.logo i{font-style:normal;font-weight:300;font-size:.8em}
+.logo span{font-weight:300;letter-spacing:.02em}.logo b{font-weight:700}
+.logo *{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{display:flex;gap:26px;font-size:13px;letter-spacing:.04em}
+.nav a{text-decoration:none;color:var(--soft)}.nav a:hover{color:var(--ink)}
+.pill{justify-self:end;border:1px solid var(--ink);border-radius:40px;padding:9px 20px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;font-weight:500;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;display:inline-block}
+.pill:hover{background:var(--ink);color:var(--bg)}
+.hero{position:relative;text-align:center;padding:70px 0 0;overflow:hidden}
+.glow{position:absolute;left:50%;top:300px;width:1300px;max-width:160%;height:380px;transform:translateX(-50%);filter:blur(70px);opacity:.85;z-index:-1;background:radial-gradient(40% 50% at 25% 50%,#6f9bff,transparent 70%),radial-gradient(40% 55% at 55% 45%,#9b6bf5,transparent 70%),radial-gradient(35% 45% at 85% 55%,#cfa6ff,transparent 70%)}
+.hero .it.tag{font-size:22px;color:var(--soft)}
+h1{font:700 clamp(42px,7.4vw,86px)/.98 'Instrument Sans',sans-serif;letter-spacing:-.035em;margin:10px auto 22px;max-width:11em}
+h1 .it{font-weight:400;letter-spacing:-.01em;font-size:1.06em}
+.hero p{color:var(--soft);max-width:34em;margin:0 auto 28px}
+.shot{margin:56px auto 0;width:min(380px,78vw);-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+.shot img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 30%;border-radius:200px 200px 0 0}
+section{padding:96px 0}
+h2{font:700 clamp(32px,5vw,58px)/1.02 'Instrument Sans',sans-serif;letter-spacing:-.03em;margin:0}
+h2 .it{font-weight:400;letter-spacing:-.01em;font-size:1.06em}
+.split{display:grid;grid-template-columns:1.4fr .8fr;gap:56px;align-items:end;margin-bottom:56px}
+.split p{margin:0;color:var(--soft)}
+.tabs{display:flex;gap:10px;margin-bottom:34px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:transparent;color:var(--soft);padding:10px 20px;font:500 14px 'Instrument Sans',sans-serif;border-radius:40px;cursor:pointer}
+.tab[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 28px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);padding:11px 22px;font:500 15px 'Instrument Sans',sans-serif;cursor:pointer;border-radius:40px}
+.chip[aria-pressed=true]{background:var(--g);color:#fff;border-color:transparent}
+.opt{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--soft)}
+.opt input{margin-top:5px;accent-color:var(--violet)}
+.ficha{position:relative;background:var(--paper);border-radius:26px;padding:36px;border:1px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--g) border-box}
+.ficha h3{font:400 italic 40px/1 'Instrument Serif',serif;margin:8px 0 0}
+.price{font:700 44px/1.1 'Instrument Sans',sans-serif;letter-spacing:-.03em;margin:16px 0 2px}
+.sub{font-size:14px;color:var(--soft);margin:0 0 18px}
+.ficha p{margin:0 0 16px}
+.btn{display:block;text-align:center;background:var(--wa);color:#fff;padding:15px 24px;border-radius:40px;text-decoration:none;font-weight:600;font-size:15px}
+.note{font-size:13.5px;color:var(--soft);margin:16px 0 0!important}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+.steps b{font:italic 400 54px/1 'Instrument Serif',serif;display:block;margin-bottom:10px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content}
+.steps h4{margin:0 0 6px;font-size:17px}.steps p{margin:0;font-size:15px;color:var(--soft)}
+.facts{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:48px}
+.facts span{border:1px solid var(--line);border-radius:40px;padding:8px 18px;font-size:14px;color:var(--soft)}
+.band{background:linear-gradient(115deg,#1f2a8a,#5b3fd6 55%,#a77bf2);color:#fff}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+blockquote{margin:0;font:italic 400 clamp(28px,3.6vw,42px)/1.15 'Instrument Serif',serif}
+blockquote cite{display:block;margin-top:18px;font:500 12px 'Instrument Sans',sans-serif;font-style:normal;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.gal{columns:3;column-gap:20px;margin-top:8px}
+.work{break-inside:avoid;margin:0 0 24px}
+.work img{width:100%;border-radius:14px}
+.ph{background:var(--paper);border:1px dashed var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.work figcaption{font-size:14px;color:var(--soft);padding-top:8px}
+.work figcaption b{display:block;color:var(--ink);font:italic 400 21px 'Instrument Serif',serif}
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.about img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:200px 200px 24px 24px}
+.about p{margin:18px 0 0;color:var(--soft)}
+details{border-top:1px solid var(--line);padding:20px 0}details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font:500 20px 'Instrument Sans',sans-serif;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::after{content:"+";color:var(--violet);font-size:24px;line-height:1}details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--soft);max-width:46em}
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+footer{padding:56px 0 48px;text-align:center;color:var(--soft);font-size:14px;border-top:1px solid var(--line)}
+footer .logo{margin:0 auto 20px;font-size:20px;align-items:flex-start}
+footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
+@media(max-width:860px){header .wrap{grid-template-columns:auto 1fr}.nav{display:none}.pick,.about,.faq,.split,.quotes{grid-template-columns:1fr;gap:34px}.steps{grid-template-columns:1fr 1fr}.gal{columns:2}section{padding:68px 0}.about img{max-width:420px}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}.gal{columns:1}.ficha{padding:26px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#" aria-label="Art By Karen Arce"><i>Art</i><span>BY<b>KAREN</b>ARCE</span></a>
+<nav class="nav"><a href="https://instagram.com/by.karenarce" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener">TikTok</a><a href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener">Artmajeur</a></nav>
+<a class="pill" href="#encargo">Encargar</a></div></header>
+
+<main>
+<div class="hero"><div class="glow"></div><div class="wrap">
+<span class="it tag">Pintado a mano, un recuerdo innolvidable</span>
+<h1>Retratos al óleo <span class="it">con alma</span> y carácter</h1>
+<p>Convierto tus fotografías en una pintura única: un regalo inolvidable, un recuerdo para conservar o una obra que acompañe tus espacios.</p>
+<a class="pill" href="#encargo">Elegir formato →</a>
+<div class="shot"><img src="images/Foto perfil.jpg" alt="Karen Arce pintando dos retratos al óleo en su caballete"></div>
+</div></div>
+
+<section id="encargo"><div class="wrap">
+<div class="split"><h2>Elige el formato <span class="it">de tu obra</span></h2><p>Cada pieza es única y hecha a mano. Selecciona el tamaño, mira el valor y escríbeme por WhatsApp para coordinar los detalles.</p></div>
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="r" aria-selected="true">Retrato al óleo</button><button class="tab" role="tab" data-t="d" aria-selected="false">Pintura artística para decoración</button></div>
+<div class="pick"><div>
+<span class="label">Moneda</span>
+<div class="chips" id="cur"><button class="chip" data-c="COP" aria-pressed="true">COP · Colombia</button><button class="chip" data-c="USD" aria-pressed="false">USD · Exterior</button></div>
+<span class="label">Tamaño</span><div class="chips" id="sizes"></div>
+<label class="opt" id="extraBox"><input type="checkbox" id="extra"><span>Añadir una segunda persona, o unir en un solo cuadro a dos personas que no tienen foto juntas (+30%)</span></label>
+</div>
+<div class="ficha"><span class="label" id="fk"></span><h3 id="fs"></h3><div class="price" id="fp"></div><p class="sub" id="fsub"></p><p id="fd"></p>
+<a class="btn" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+<p class="note" id="fn"></p></div></div>
+</div></section>
+
+<section id="proceso" style="padding-top:0"><div class="wrap">
+<div class="split"><h2>Del recuerdo <span class="it">al lienzo</span></h2><p>Un proceso claro, con tu aprobación en cada paso importante.</p></div>
+<ol class="steps">
+<li><b>1</b><h4>Eliges y envías</h4><p>Defines el tamaño y me envías la o las fotos de referencia junto con el anticipo del 50%.</p></li>
+<li><b>2</b><h4>Boceto</h4><p>Preparo el boceto de tu obra y te lo comparto para que lo apruebes.</p></li>
+<li><b>3</b><h4>Pintura</h4><p>Con tu aprobación comienza la primera fase de pintura al óleo sobre lienzo.</p></li>
+<li><b>4</b><h4>Entrega</h4><p>Pagas el 50% restante y te envío tu cuadro con packing, tarjeta y certificación.</p></li></ol>
+<div class="facts"><span>7 días de elaboración, sin contar el envío</span><span>Envío nacional por Interrapidísimo o Servientrega, a cargo del cliente</span><span>Packing, tarjeta y certificación incluidos</span></div>
+</div></section>
+
+<section id="galeria" style="padding-top:0"><div class="wrap">
+<div class="split"><h2>Obras <span class="it">anteriores</span></h2><p>Óleo sobre lienzo, figurativo con una ligera tendencia al expresionismo.</p></div>
+<div class="gal" id="gal"></div></div></section>
+
+<section class="band"><div class="wrap quotes">
+<blockquote>“Una magnífica obra de arte de la artista Karen Arce. ¡Me encanta!”<cite>François-Pierre Bleau</cite></blockquote>
+<blockquote>“Un trabajo magnífico y talentoso.”<cite>François-Pierre Bleau</cite></blockquote></div></section>
+
+<section id="sobre"><div class="wrap about">
+<img src="images/Foto perfil.jpg" alt="Retrato de Karen Arce en una librería">
+<div><span class="label">Sobre mí</span><h2 style="margin-top:12px">Karen <span class="it">Arce</span></h2>
+<p>Soy una artista colombiana oriunda de un pequeño pueblo del Departamento del Meta, que ha encontrado en la pintura una forma auténtica de revelación y liberación personal. Con 28 años y formación lasallista en Arquitectura, descubrí una verdadera vocación y responsabilidad en el arte de crear.</p>
+<p>Mis pinturas en óleo sobre lienzo suelen ser figurativas, con una ligera tendencia al expresionismo. Busco plasmar la sensibilidad humana: una dimensión que requiere tacto para ver y vulnerabilidad para descubrirse en ella tal cual es.</p>
+<p>Esta sensibilidad intrínseca a nuestra naturaleza aporta valor y sentido a todas las artes que cohabitamos y necesitamos en sociedad. En esta búsqueda por expresar emociones y experiencias íntimas, quiero crear un diálogo que invite a la introspección y al autorreconocimiento más humano.</p></div></div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap faq">
+<h2>Antes de <span class="it">escribirme</span></h2>
+<div>
+<details><summary>¿Cómo se paga?</summary><p>Se paga el 50% de anticipo para apartar tu lugar y el 50% restante cuando apruebes el primer avance. En Colombia el pago se hace por transferencia con llaves Bre-B desde cualquier cuenta bancaria; desde el exterior, en USD por PayPal. Te envío los datos de pago por WhatsApp.</p></details>
+<details><summary>¿Cuánto tarda mi cuadro?</summary><p>La elaboración toma 7 días, sin contar los tiempos de envío.</p></details>
+<details><summary>¿Cuántas personas caben en un retrato?</summary><p>Cada retrato incluye una persona. Para añadir otra, o para unir a dos personas que no tienen una foto juntas, se suma un 30% al valor del cuadro.</p></details>
+<details><summary>¿Cómo se envía?</summary><p>En Colombia el envío es por Interrapidísimo o Servientrega, con costo a cargo del cliente. El packing, la tarjeta y la certificación los cubro yo. Para envíos al exterior coordinamos los detalles por WhatsApp.</p></details>
+<details><summary>¿Qué foto debo enviar?</summary><p>Una imagen nítida y bien iluminada donde se vea bien el rostro. Si tienes varias, envíalas todas y te oriento sobre cuál funciona mejor.</p></details>
+</div></div></section>
+</main>
+
+<footer><div class="wrap"><a class="logo" href="#" aria-label="Art By Karen Arce"><i>Art</i><span>BY<b>KAREN</b>ARCE</span></a>
+<a class="s" href="https://instagram.com/by.karenarce" target="_blank" rel="noopener">@by.karenarce</a><a class="s" href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener">art.bykarenarce</a><a class="s" href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener">Artmajeur</a>
+<p>Pinturas originales al óleo · Colombia · Envíos nacionales e internacionales</p></div></footer>
+<script>
+var CATALOG={
+r:{k:'Retrato al óleo',desc:'Pintado a mano a partir de tu fotografía. Ideal para regalar o conservar un recuerdo.',
+sizes:[{s:'25x30 cm',cop:800000,usd:250,d:'Formato íntimo, perfecto para un regalo personal.'},{s:'30x40 cm',cop:900000,usd:280,d:'Un tamaño equilibrado para repisas, mesas de noche o muros pequeños.'},{s:'40x50 cm',cop:1100000,usd:345,d:'Presencia propia en la pared, con mayor detalle en rostro y fondo.'}]},
+d:{k:'Encargo artístico para decoración interior',desc:'Obra de gran formato pensada para acompañar tu espacio de forma creativa.',
+sizes:[{s:'70x100 cm',cop:2500000,usd:780,d:'Pieza protagonista para salas, comedores o estudios.'},{s:'100x150 cm',cop:3000000,usd:940,d:'Gran formato para espacios amplios, con impacto visual.'}]}};
+var st={t:'r',i:0,c:'COP',x:false};
+var $=function(i){return document.getElementById(i)};
+function fmt(n){return '$'+n.toLocaleString('es-CO').replace(/,/g,'.')}
+function render(){
+ var g=CATALOG[st.t],z=g.sizes[st.i],mult=(st.t==='r'&&st.x)?1.3:1;
+ var base=st.c==='COP'?z.cop:z.usd,tot=Math.round(base*mult/(st.c==='USD'?5:1000))*(st.c==='USD'?5:1000);
+ if(st.c==='USD'&&mult===1)tot=base;
+ $('sizes').innerHTML=g.sizes.map(function(s,n){return '<button class="chip" data-i="'+n+'" aria-pressed="'+(n===st.i)+'">'+s.s+'</button>'}).join('');
+ $('fk').textContent=g.k;$('fs').textContent=z.s;
+ $('fp').textContent=fmt(tot)+' '+st.c;
+ $('fsub').textContent=st.t==='r'?(st.x?'2 personas · incluye +30%':'1 persona incluida'):'Obra única sobre lienzo';
+ $('fd').textContent=z.d;
+ $('extraBox').style.display=st.t==='r'?'flex':'none';
+ $('fn').textContent=st.c==='COP'?'Pago por transferencia con llaves Bre-B. 50% de anticipo y 50% al aprobar el primer avance.':'Pago en USD por PayPal. 50% de anticipo y 50% al aprobar el primer avance.';
+ var m='Hola Karen, quiero encargar '+(st.t==='r'?'un retrato al óleo':'una pintura artística para decoración')+' de '+z.s+(st.t==='r'?(st.x?' con 2 personas':' con 1 persona'):'')+' ('+fmt(tot)+' '+st.c+'). ¿Podemos coordinar los detalles?';
+ $('wa').href='https://wa.me/573244733213?text='+encodeURIComponent(m);
+}
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){st.t=b.dataset.t;st.i=0;document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',x===b)});render()}});
+$('cur').onclick=function(e){var c=e.target.dataset.c;if(!c)return;st.c=c;this.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.c===c)});render()};
+$('sizes').onclick=function(e){var i=e.target.dataset.i;if(i===undefined)return;st.i=+i;render()};
+$('extra').onchange=function(){st.x=this.checked;render()};
+render();
+// Galería: agrega objetos {src, titulo, detalle}
+var GALLERY=[];
+var h=['4/5','1/1','3/4','4/5','5/4','3/4'];
+$('gal').innerHTML=(GALLERY.length?GALLERY:h.map(function(a,n){return{ph:a,t:'Obra '+(n+1)}})).map(function(w){
+ return '<figure class="work">'+(w.src?'<img loading="lazy" src="'+w.src+'" alt="'+w.t+'">':'<div class="ph" style="aspect-ratio:'+w.ph+'">Próximamente</div>')+(w.src?'<figcaption><b>'+w.t+'</b>'+(w.d||'')+'</figcaption>':'')+'</figure>'}).join('');
+</script>
+</body>
+</html>
