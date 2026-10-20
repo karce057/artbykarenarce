@@ -248,6 +248,20 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
  .steps p{font-size:13.5px;line-height:1.45}
  .steps li::before{inset:-12px -8px}
 }
+ /* ===== Taller: oscurecido en fotos, videos del mismo tamaño, botón en celular ===== */
+@media (hover:hover){
+ .tph.has::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(18,16,43,.38);transition:opacity .3s ease;pointer-events:none}
+ .tph.has:hover::before{opacity:0}
+}
+.tvids{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.tvids{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+ .tvids{grid-template-columns:repeat(2,1fr);gap:10px}
+ .taller-top>div:last-child{display:flex;flex-direction:column}
+ .taller-top p{margin-bottom:20px}
+ .taller-top .btn{margin-top:0;width:100%}
+}
+@media(max-width:380px){.tvids{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
