@@ -216,6 +216,21 @@ footer .logo *{background:none;-webkit-background-clip:initial;background-clip:i
 .fsoc a{border-color:rgba(255,255,255,.4);color:#fff}
 .fsoc a:hover{background:#fff;border-color:#fff;color:#5b3fd6}
 footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top:24px;margin:0}
+ /* ===== Carrusel de reseñas ===== */
+.rev{text-align:center}
+.rev-label{color:rgba(255,255,255,.75);display:block;margin-bottom:26px}
+.rev-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;outline:none}
+.rev-track::-webkit-scrollbar{display:none}
+.rev-slide{flex:0 0 100%;scroll-snap-align:center;padding:0 clamp(0px,6vw,90px)}
+.rev-slide blockquote{font-size:clamp(20px,2.5vw,28px);line-height:1.3;max-width:26em;margin:0 auto}
+.rev-slide cite{margin-top:16px}
+.rev-ctrl{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:30px}
+.rev-b{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .2s}
+.rev-b:hover{background:rgba(255,255,255,.2)}
+.rev-dots{display:flex;gap:8px}
+.rev-dots button{width:8px;height:8px;padding:0;border-radius:8px;border:0;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s}
+.rev-dots button.on{width:24px;background:#fff}
+@media(max-width:600px){.rev-slide{padding:0 4px}.rev-b{display:none}}
 </style>
 </head>
 <body>
@@ -282,9 +297,11 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
   <div class="tvids" id="tvideos"></div>
 </div></section>
 
-<section class="band" id="resenas"><div class="wrap quotes">
-<blockquote>“Una magnífica obra de arte de la artista Karen Arce. ¡Me encanta!”<cite>François-Pierre Bleau</cite></blockquote>
-<blockquote>“Un trabajo magnífico y talentoso.”<cite>François-Pierre Bleau</cite></blockquote></div></section>
+<section class="band" id="resenas"><div class="wrap rev">
+<span class="label rev-label">Lo que dicen de mi trabajo</span>
+<div class="rev-track" id="revTrack" tabindex="0" aria-label="Reseñas de clientes"></div>
+<div class="rev-ctrl"><button class="rev-b" id="revPrev" aria-label="Reseña anterior">&#8249;</button><div class="rev-dots" id="revDots"></div><button class="rev-b" id="revNext" aria-label="Reseña siguiente">&#8250;</button></div>
+</div></section>
 
 <section id="sobre"><div class="wrap about">
 <img src="images/Foto perfil.png" alt="Retrato de Karen Arce en una librería">
@@ -452,6 +469,28 @@ var TALLER={
  function open(e){var el=e.target.closest('.tph.has');if(el){openLb({t:'Taller de pintura · Restrepo, Meta',imgs:f.slice()});tr.scrollLeft=(+el.dataset.i)*tr.clientWidth;}}
  box.onclick=open;box.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e)}};
  $('tvideos').innerHTML=TALLER.videos.map(function(v){return '<div class="tvid"><video src="'+v+'#t=0.1" controls playsinline preload="metadata"></video></div>'}).join('');
+})();
+ // ===== Reseñas: agrega más con una línea cada una {q:'texto',a:'nombre'} =====
+var RESENAS=[
+ {q:'Una magnífica obra de arte de la artista Karen Arce. ¡Me encanta!',a:'François-Pierre Bleau'},
+ {q:'Un trabajo magnífico y talentoso.',a:'François-Pierre Bleau'}
+];
+(function(){
+ var tk=$('revTrack'),dt=$('revDots'),n=RESENAS.length,i=0,timer;
+ tk.innerHTML=RESENAS.map(function(r){return '<div class="rev-slide"><blockquote>“'+r.q+'”<cite>'+r.a+'</cite></blockquote></div>'}).join('');
+ dt.innerHTML=RESENAS.map(function(r,k){return '<button aria-label="Ir a la reseña '+(k+1)+'" data-k="'+k+'"></button>'}).join('');
+ if(n<2){$('revPrev').style.display=$('revNext').style.display=dt.style.display='none'}
+ function go(k){i=(k+n)%n;tk.scrollTo({left:i*tk.clientWidth,behavior:'smooth'})}
+ function mark(){i=Math.round(tk.scrollLeft/tk.clientWidth);[].forEach.call(dt.children,function(b,k){b.classList.toggle('on',k===i)})}
+ tk.addEventListener('scroll',function(){clearTimeout(tk._t);tk._t=setTimeout(mark,60)});
+ dt.onclick=function(e){if(e.target.dataset.k)go(+e.target.dataset.k)};
+ $('revPrev').onclick=function(){go(i-1)};$('revNext').onclick=function(){go(i+1)};
+ function play(){stop();if(n>1&&!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(function(){go(i+1)},6000)}
+ function stop(){clearInterval(timer)}
+ var box=$('resenas');['mouseenter','focusin','touchstart'].forEach(function(e){box.addEventListener(e,stop,{passive:true})});
+ ['mouseleave','focusout','touchend'].forEach(function(e){box.addEventListener(e,play,{passive:true})});
+ window.addEventListener('resize',function(){tk.scrollLeft=i*tk.clientWidth});
+ mark();play();
 })();
 </script>
 </body>
