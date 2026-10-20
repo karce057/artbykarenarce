@@ -162,10 +162,9 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 24px;text-align:center}
 .trust b{display:block;font:700 15px 'Instrument Sans',sans-serif}.trust span{font-size:13px;color:var(--soft)}
 /* ===== Taller presencial ===== */
-.taller-top{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:end;margin-bottom:40px}
-.taller-top p{margin:0 0 18px;color:var(--soft)}
-.taller-top .btn{display:inline-block;padding:15px 34px}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.taller-top{display:grid;grid-template-columns:1fr auto;gap:24px 56px;align-items:center;margin-bottom:40px}
+.taller-top .taller-cta{justify-self:end}
+.taller-top .taller-desc{grid-column:1 / -1;margin:0;color:var(--soft);max-width:60em}
 .tph,.tvid{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#dcd9fb,#c4d3ff);display:flex;align-items:center;justify-content:center;color:#5b3fd6;font-size:13px;font-weight:500;text-align:center;padding:10px}
 .tph img,.tvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tph.has{cursor:zoom-in;transition:transform .3s ease,box-shadow .3s ease}
@@ -260,10 +259,16 @@ footer .logo{margin-bottom:14px}
 <div class="gal" id="gal"></div></div></section>
 
 <section id="taller"><div class="wrap">
-<div class="taller-top"><div><span class="label">Presencial · Restrepo, Meta</span><h2 style="margin-top:12px">Taller de <span class="it">pintura</span></h2></div>
-<div><p>Aprende a pintar al óleo en un espacio íntimo y creativo. Cupos limitados: escríbeme por WhatsApp para conocer fechas, valor y el próximo taller.</p><a class="btn" id="wataller" target="_blank" rel="noopener" href="#">Preguntar por el próximo taller</a></div></div>
-<div class="tgrid" id="tfotos" aria-label="Fotos de talleres anteriores"></div>
-<div class="tvids" id="tvideos"></div>
+<div class="taller-top">
+  <div>
+    <span class="label">Presencial · Restrepo, 【entity-Meta¦canonical_name=Meta】</span>
+    <h2 style="margin-top:12px">Taller de <span class="it">pintura</span></h2>
+  </div>
+  <div class="taller-cta">
+    <a class="btn" id="wataller" target="_blank" rel="noopener" href="#">Preguntar por el próximo taller</a>
+  </div>
+  <p class="taller-desc">Aprende a pintar al óleo en un espacio íntimo y creativo. Cupos limitados: escríbeme por WhatsApp para conocer fechas, valor y el próximo taller.</p>
+</div>
 </div></section>
 
 <section class="band" id="resenas"><div class="wrap quotes">
