@@ -236,7 +236,7 @@ d:{k:'Encargo artístico para decoración interior',desc:'Obra de gran formato p
 sizes:[{s:'70x100 cm',cop:2500000,usd:780,d:'Pieza protagonista para salas, comedores o estudios.'},{s:'100x150 cm',cop:3000000,usd:940,d:'Gran formato para espacios amplios, con impacto visual.'}]}};
 // FOTOS: cambia las rutas cuando tengas las imágenes (una por formato). Si el archivo no existe, se ve un fondo de color.
 // Puedes poner una ruta ('images/a.jpg') o varias (['images/a.jpg','images/b.jpg']): la primera se ve en la caja y todas se deslizan al ampliar.
-var FOTOS={'25x30 cm':'images/formato25x30.png','30x40 cm':'images/formato-30x40.jpg','40x50 cm':'images/formato-40x50.jpg','70x100 cm':'images/formato-70x100.jpg','100x150 cm':'images/formato-100x150.jpg'};
+var FOTOS={'25x30 cm':'images/formato25x30.png','30x40 cm':'images/formato30x40.png','40x50 cm':'images/formato40x50.png','70x100 cm':'images/formato70x100.png','100x150 cm':'images/formato100x150.png'};
 function dibujaMedidas(g,sel){
  var d=g.sizes.map(function(s){var m=s.s.match(/(\d+)x(\d+)/);return[+m[1],+m[2]]}),k=100/Math.max.apply(null,d.map(function(a){return a[1]})),x=4,out='';
  d.forEach(function(a,n){var w=a[0]*k,hh=a[1]*k,rx=x+14,y=22+100-hh;
