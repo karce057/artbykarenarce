@@ -159,15 +159,17 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 </div></div>
 
 <section id="encargo"><div class="wrap">
-<div class="split"><h2>Elige el formato <span class="it">de tu obra</span></h2><p>Cada pieza es única y hecha a mano. Selecciona el tamaño, mira el valor y escríbeme por WhatsApp para coordinar los detalles.</p></div>
-<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="r" aria-selected="true">Retrato al óleo</button><button class="tab" role="tab" data-t="d" aria-selected="false">Pintura artística para decoración</button></div>
+<h2>Elige el formato <span class="it">de tu obra</span></h2>
 <div class="pick"><div>
-<span class="label">Moneda</span>
+<p class="lead">Cada pieza es única y hecha a mano. Selecciona el tamaño, mira el valor y escríbeme por WhatsApp para coordinar los detalles.</p>
+<span class="label">Selecciona qué tipo de pintura buscas</span>
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="r" aria-selected="true">Retrato al óleo</button><button class="tab" role="tab" data-t="d" aria-selected="false">Pintura artística para decoración</button></div>
+<span class="label">Qué moneda</span>
 <div class="chips" id="cur"><button class="chip" data-c="COP" aria-pressed="true">COP · Colombia</button><button class="chip" data-c="USD" aria-pressed="false">USD · Exterior</button></div>
-<span class="label">Tamaño</span><div class="chips" id="sizes"></div>
-<label class="opt" id="extraBox"><input type="checkbox" id="extra"><span>Añadir una segunda persona, o unir en un solo cuadro a dos personas que no tienen foto juntas (+30%)</span></label>
+<span class="label">Tamaño a elegir</span><div class="chips" id="sizes"></div>
+<label class="opt" id="extraBox"><input type="checkbox" id="extra"><span>Nota: añadir una segunda persona a la escena (incluso dos personas que no tienen fotos juntas) tiene un costo adicional del 30%.</span></label>
 </div>
-<div class="ficha"><span class="label" id="fk"></span><h3 id="fs"></h3><div class="price" id="fp"></div><p class="sub" id="fsub"></p><p id="fd"></p>
+<div class="ficha"><div class="media"><div class="photo" id="fph"></div><div class="dia" id="fdia"></div></div><span class="label" id="fk"></span><h3 id="fs"></h3><div class="price" id="fp"></div><p class="sub" id="fsub"></p><p id="fd"></p>
 <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
 <p class="note" id="fn"></p></div></div>
 </div></section>
@@ -217,6 +219,14 @@ r:{k:'Retrato al óleo',desc:'Pintado a mano a partir de tu fotografía. Ideal p
 sizes:[{s:'25x30 cm',cop:800000,usd:250,d:'Formato íntimo, perfecto para un regalo personal.'},{s:'30x40 cm',cop:900000,usd:280,d:'Un tamaño equilibrado para repisas, mesas de noche o muros pequeños.'},{s:'40x50 cm',cop:1100000,usd:345,d:'Presencia propia en la pared, con mayor detalle en rostro y fondo.'}]},
 d:{k:'Encargo artístico para decoración interior',desc:'Obra de gran formato pensada para acompañar tu espacio de forma creativa.',
 sizes:[{s:'70x100 cm',cop:2500000,usd:780,d:'Pieza protagonista para salas, comedores o estudios.'},{s:'100x150 cm',cop:3000000,usd:940,d:'Gran formato para espacios amplios, con impacto visual.'}]}};
+// FOTOS: cambia las rutas cuando tengas las imágenes (una por formato). Si el archivo no existe, se ve un fondo de color.
+var FOTOS={'25x30 cm':'images/formato-25x30.jpg','30x40 cm':'images/formato-30x40.jpg','40x50 cm':'images/formato-40x50.jpg','70x100 cm':'images/formato-70x100.jpg','100x150 cm':'images/formato-100x150.jpg'};
+function dibujaMedidas(g,sel){
+ var d=g.sizes.map(function(s){var m=s.s.match(/(\d+)x(\d+)/);return[+m[1],+m[2]]}),k=100/Math.max.apply(null,d.map(function(a){return a[1]})),x=4,out='';
+ d.forEach(function(a,n){var w=a[0]*k,hh=a[1]*k,rx=x+14,y=22+100-hh;
+  out+='<text x="'+(x+7)+'" y="'+(y+hh/2)+'" text-anchor="middle" transform="rotate(-90 '+(x+7)+' '+(y+hh/2)+')">'+a[1]+'cm</text><rect class="'+(n===sel?'on':'')+'" x="'+rx+'" y="'+y+'" width="'+w+'" height="'+hh+'"/><text x="'+(rx+w/2)+'" y="'+(y-5)+'" text-anchor="middle">'+a[0]+'cm</text>';
+  x=rx+w+8});
+ return '<svg viewBox="0 0 '+x+' 126" role="img" aria-label="Comparación de tamaños">'+out+'</svg>'}
 var st={t:'r',i:0,c:'COP',x:false};
 var $=function(i){return document.getElementById(i)};
 function fmt(n){return '$'+n.toLocaleString('es-CO').replace(/,/g,'.')}
@@ -225,6 +235,8 @@ function render(){
  var base=st.c==='COP'?z.cop:z.usd,tot=Math.round(base*mult/(st.c==='USD'?5:1000))*(st.c==='USD'?5:1000);
  if(st.c==='USD'&&mult===1)tot=base;
  $('sizes').innerHTML=g.sizes.map(function(s,n){return '<button class="chip" data-i="'+n+'" aria-pressed="'+(n===st.i)+'">'+s.s+'</button>'}).join('');
+ $('fdia').innerHTML=dibujaMedidas(g,st.i);
+ $('fph').innerHTML=FOTOS[z.s]?'<img src="'+FOTOS[z.s]+'" alt="Ejemplo del formato '+z.s+'" onerror="this.remove()">':'';
  $('fk').textContent=g.k;$('fs').textContent=z.s;
  $('fp').textContent=fmt(tot)+' '+st.c;
  $('fsub').textContent=st.t==='r'?(st.x?'2 personas · incluye +30%':'1 persona incluida'):'Obra única sobre lienzo';
