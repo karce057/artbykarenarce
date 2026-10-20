@@ -277,6 +277,12 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
  .about h2{grid-column:2;grid-row:2;align-self:start;margin:0!important;font-size:34px;line-height:36px}
  .about p{grid-column:1/-1;margin-top:14px}
 }
+ /* ===== Taller (responsive): botón siempre debajo del párrafo ===== */
+@media(max-width:860px){
+ .taller-top>div:last-child{display:flex;flex-direction:column;margin-top:18px}
+ .taller-top>div:last-child p{order:1;margin:0 0 22px}
+ .taller-top>div:last-child .btn{order:2;margin:0;width:100%}
+}
 </style>
 </head>
 <body>
