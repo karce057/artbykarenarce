@@ -231,6 +231,23 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
 .rev-dots button{width:8px;height:8px;padding:0;border-radius:8px;border:0;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s}
 .rev-dots button.on{width:24px;background:#fff}
 @media(max-width:600px){.rev-slide{padding:0 4px}.rev-b{display:none}}
+ /* ===== Ajustes celular: galería, formato y pasos en 2 columnas ===== */
+@media(max-width:600px){
+ .gal{columns:2;column-gap:10px}
+ .work{margin-bottom:16px}
+ .work figcaption{font-size:12px;padding-top:6px}
+ .work figcaption b{font-size:14px}
+ .work .cnt{top:6px;right:6px;font-size:11px;padding:3px 8px}
+ #encargo .tabs{flex-wrap:nowrap;gap:8px}
+ #encargo .tab{flex:1;min-width:0;padding:8px 10px;font-size:13px;line-height:1.25;border-radius:22px;white-space:normal;text-align:center}
+ #cur,#sizes{flex-wrap:nowrap;gap:8px}
+ #cur .chip,#sizes .chip{flex:1;min-width:0;padding:10px 6px;font-size:13px;white-space:nowrap;text-align:center}
+ .steps{grid-template-columns:1fr 1fr;gap:28px 18px}
+ .steps b{font-size:38px;margin-bottom:6px}
+ .steps h4{font-size:15px}
+ .steps p{font-size:13.5px;line-height:1.45}
+ .steps li::before{inset:-12px -8px}
+}
 </style>
 </head>
 <body>
