@@ -90,7 +90,11 @@ h2 .it{font-weight:400;letter-spacing:-.01em;font-size:1.06em}
 #encargo .pick{align-items:start}
 .media{display:flex;gap:16px;align-items:flex-end;margin-bottom:24px}
 .photo{flex:0 0 46%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#dcd9fb,#c4d3ff)}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo{position:relative;contain:size}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo.has{cursor:zoom-in}
+.photo.has::after{content:'\2922';position:absolute;right:8px;bottom:8px;width:28px;height:28px;border-radius:50%;background:rgba(15,14,35,.6);color:#fff;font-size:15px;line-height:28px;text-align:center;pointer-events:none}
+.photo.has:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 .dia{flex:1;min-width:0}.dia svg{width:100%;height:auto;display:block}
 .dia text{font:500 9px 'Instrument Sans',sans-serif;fill:var(--soft)}
 .dia rect{fill:none;stroke:var(--soft);stroke-width:1.2;transition:all .2s}
@@ -231,6 +235,7 @@ sizes:[{s:'25x30 cm',cop:800000,usd:250,d:'Formato íntimo, perfecto para un reg
 d:{k:'Encargo artístico para decoración interior',desc:'Obra de gran formato pensada para acompañar tu espacio de forma creativa.',
 sizes:[{s:'70x100 cm',cop:2500000,usd:780,d:'Pieza protagonista para salas, comedores o estudios.'},{s:'100x150 cm',cop:3000000,usd:940,d:'Gran formato para espacios amplios, con impacto visual.'}]}};
 // FOTOS: cambia las rutas cuando tengas las imágenes (una por formato). Si el archivo no existe, se ve un fondo de color.
+// Puedes poner una ruta ('images/a.jpg') o varias (['images/a.jpg','images/b.jpg']): la primera se ve en la caja y todas se deslizan al ampliar.
 var FOTOS={'25x30 cm':'images/formato-25x30.jpg','30x40 cm':'images/formato-30x40.jpg','40x50 cm':'images/formato-40x50.jpg','70x100 cm':'images/formato-70x100.jpg','100x150 cm':'images/formato-100x150.jpg'};
 function dibujaMedidas(g,sel){
  var d=g.sizes.map(function(s){var m=s.s.match(/(\d+)x(\d+)/);return[+m[1],+m[2]]}),k=100/Math.max.apply(null,d.map(function(a){return a[1]})),x=4,out='';
@@ -247,7 +252,10 @@ function render(){
  if(st.c==='USD'&&mult===1)tot=base;
  $('sizes').innerHTML=g.sizes.map(function(s,n){return '<button class="chip" data-i="'+n+'" aria-pressed="'+(n===st.i)+'">'+s.s+'</button>'}).join('');
  $('fdia').innerHTML=dibujaMedidas(g,st.i);
- $('fph').innerHTML=FOTOS[z.s]?'<img src="'+FOTOS[z.s]+'" alt="Ejemplo del formato '+z.s+'" onerror="this.remove()">':'';
+ var fl=[].concat(FOTOS[z.s]||[]),ph=$('fph');
+ ph.classList.remove('has');ph.removeAttribute('tabindex');ph.removeAttribute('role');ph.removeAttribute('aria-label');
+ ph.innerHTML=fl.length?'<img src="'+fl[0]+'" alt="Ejemplo del formato '+z.s+'">':'';
+ if(fl.length){var im=ph.firstChild;im.onload=function(){ph.classList.add('has');ph.tabIndex=0;ph.setAttribute('role','button');ph.setAttribute('aria-label','Ampliar foto del formato '+z.s)};im.onerror=function(){im.remove()};if(im.complete&&im.naturalWidth)im.onload()}
  $('fk').textContent=g.k;$('fs').textContent=z.s;
  $('fp').textContent=fmt(tot)+' '+st.c;
  $('fsub').textContent=st.t==='r'?(st.x?'2 personas · incluye +30%':'1 persona incluida'):'Obra única sobre lienzo';
@@ -286,7 +294,7 @@ var tr=lb.querySelector('.lb-track'),cap=lb.querySelector('.lb-cap'),th=lb.query
 function mark(){var n=Math.round(tr.scrollLeft/tr.clientWidth);cap.innerHTML=cur.t+(cur.imgs.length>1?'<small>'+(n+1)+' / '+cur.imgs.length+'</small>':'');
  [].forEach.call(th.children,function(e,m){e.classList.toggle('on',m===n)})}
 function go(n){tr.scrollTo({left:n*tr.clientWidth,behavior:'smooth'})}
-function openLb(k){cur=GALLERY[k];
+function openLb(k){cur=(typeof k==='object')?k:GALLERY[k];
  tr.innerHTML=cur.imgs.map(function(u){return '<img src="'+u+'" alt="'+cur.t+'" draggable="false">'}).join('');
  th.innerHTML=cur.imgs.length>1?cur.imgs.map(function(u,m){return '<img src="'+u+'" data-n="'+m+'" alt="">'}).join(''):'';
  lb.querySelector('.lb-prev').style.display=lb.querySelector('.lb-next').style.display=cur.imgs.length>1?'':'none';
@@ -300,6 +308,9 @@ lb.querySelector('.lb-next').onclick=function(){go(Math.min(cur.imgs.length-1,Ma
 lb.onclick=function(e){if(e.target===lb||e.target===tr||e.target.classList.contains('lb-stage'))closeLb()};
 document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;
  if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lb.querySelector('.lb-prev').click();if(e.key==='ArrowRight')lb.querySelector('.lb-next').click()});
+function abreFormato(){var ph=$('fph');if(!ph.classList.contains('has'))return;var g=CATALOG[st.t],z=g.sizes[st.i];openLb({t:g.k+' · '+z.s,imgs:[].concat(FOTOS[z.s])})}
+$('fph').onclick=abreFormato;
+$('fph').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();abreFormato()}};
 $('gal').onclick=function(e){var f=e.target.closest('.work');if(f&&f.dataset.k!==undefined)openLb(+f.dataset.k)};
 $('gal').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){var f=e.target.closest('.work');if(f&&f.dataset.k!==undefined){e.preventDefault();openLb(+f.dataset.k)}}};
 
