@@ -156,6 +156,58 @@ footer .logo{margin:0 auto 20px;font-size:20px;align-items:flex-start}
 footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 @media(max-width:860px){header .wrap{grid-template-columns:auto 1fr}.nav{display:none}.pick,.about,.faq,.split,.quotes{grid-template-columns:1fr;gap:34px}.steps{grid-template-columns:1fr 1fr}.gal{columns:2}section{padding:68px 0}.about img{max-width:420px}}
 @media(max-width:480px){.steps{grid-template-columns:1fr}.gal{columns:1}.ficha{padding:26px}}
+
+/* ===== Franja de confianza ===== */
+.trust{border-block:1px solid var(--line);padding:22px 0}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 24px;text-align:center}
+.trust b{display:block;font:700 15px 'Instrument Sans',sans-serif}.trust span{font-size:13px;color:var(--soft)}
+/* ===== Taller presencial ===== */
+.taller-top{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:end;margin-bottom:40px}
+.taller-top p{margin:0 0 18px;color:var(--soft)}
+.taller-top .btn{display:inline-block;padding:15px 34px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tph,.tvid{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#dcd9fb,#c4d3ff);display:flex;align-items:center;justify-content:center;color:#5b3fd6;font-size:13px;font-weight:500;text-align:center;padding:10px}
+.tph img,.tvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tph.has{cursor:zoom-in;transition:transform .3s ease,box-shadow .3s ease}
+@media (hover:hover){.tph.has:hover{transform:translateY(-4px);box-shadow:0 18px 36px -16px rgba(74,60,200,.45)}}
+.tvids{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+.tvid{background:#12102b}.tvid video{object-fit:contain;background:#12102b}
+/* ===== WhatsApp flotante ===== */
+.wafab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:20;width:56px;height:56px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(18,16,43,.5);transition:transform .2s}
+.wafab:hover{transform:scale(1.07)}.wafab svg{width:28px;height:28px;fill:#fff}
+/* ===== Footer ===== */
+footer .quote{font:italic 400 clamp(26px,4vw,36px)/1.15 'Instrument Serif',serif;color:var(--ink);margin:0 0 22px}
+.fsoc{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:0 0 24px}
+.fsoc a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .25s}
+.fsoc a:hover{background:var(--g);border-color:transparent;color:#fff;transform:translateY(-3px)}
+.fsoc svg{width:20px;height:20px;fill:currentColor}.fsoc b{font:700 18px 'Instrument Serif',serif;font-style:italic}
+footer .logo{margin-bottom:14px}
+/* ===== Responsive ===== */
+@media(max-width:1000px){.taller-top{gap:34px}.price{font-size:38px}.ficha h3{font-size:34px}}
+@media(max-width:860px){
+ .wrap{padding:0 20px}
+ .trust .wrap{grid-template-columns:1fr 1fr}
+ .taller-top{grid-template-columns:1fr;margin-bottom:28px}
+ .tgrid{grid-template-columns:repeat(2,1fr)}
+ .split{margin-bottom:34px}
+ .hero{padding-top:44px}.shot{margin-top:40px}
+ .mpanel{padding-inline:20px}
+}
+@media(max-width:600px){
+ body{font-size:16px}
+ section{padding:52px 0}
+ .tvids{grid-template-columns:1fr}
+ .tgrid{gap:10px}
+ .taller-top .btn,.hero .pill{display:block;width:100%;text-align:center}
+ .hero .pill{padding:14px 20px}
+ .chip,.tab{min-height:44px}
+ .facts{margin-top:32px}.facts span{width:100%;text-align:center;border-radius:16px}
+ .ficha{padding:22px}.price{font-size:34px}.ficha h3{font-size:30px}
+ .media{gap:12px}
+ blockquote{font-size:26px}.quotes{gap:34px}
+ .wafab{width:52px;height:52px}
+}
+@media(max-width:380px){.trust .wrap{grid-template-columns:1fr}.tgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -163,8 +215,8 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 <nav class="nav"><a href="https://instagram.com/by.karenarce" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener">TikTok</a><a href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener">Artmajeur</a></nav>
 <a class="pill" href="#encargo">Encargar</a>
 <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mpanel"><i></i></button></div>
-<div class="menu"><div class="wrap"><nav id="secnav" aria-label="Secciones"><a href="#proceso">Pasos</a><a href="#galeria">Galería</a><a href="#resenas">Reseñas</a><a href="#sobre">Sobre mí</a><a href="#faq">Preguntas frecuentes</a></nav></div></div>
-<div class="mpanel" id="mpanel"><a href="#encargo">Encargar</a><a href="#galeria">Galería</a><a href="#resenas">Reseñas</a><a href="#sobre">Sobre mí</a><a href="#faq">Preguntas frecuentes</a>
+<div class="menu"><div class="wrap"><nav id="secnav" aria-label="Secciones"><a href="#proceso">Pasos</a><a href="#galeria">Galería</a><a href="#taller">Taller</a><a href="#resenas">Reseñas</a><a href="#sobre">Sobre mí</a><a href="#faq">Preguntas frecuentes</a></nav></div></div>
+<div class="mpanel" id="mpanel"><a href="#encargo">Encargar</a><a href="#galeria">Galería</a><a href="#taller">Taller</a><a href="#resenas">Reseñas</a><a href="#sobre">Sobre mí</a><a href="#faq">Preguntas frecuentes</a>
 <div class="soc"><a href="https://instagram.com/by.karenarce" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener">TikTok</a><a href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener">Artmajeur</a></div></div></header>
 
 <main>
@@ -175,6 +227,7 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 <a class="pill" href="#encargo">Elegir formato →</a>
 <div class="shot"><img src="images/img blur pintando.png" alt="Karen Arce pintando dos retratos al óleo en su caballete"></div>
 </div></div>
+<div class="trust"><div class="wrap"><div><b>100% hecho a mano</b><span>Óleo sobre lienzo</span></div><div><b>Tu aprobación</b><span>En el boceto y el avance</span></div><div><b>Envíos nacionales</b><span>Y al exterior</span></div><div><b>Listo para regalar</b><span>Packing, tarjeta y certificación</span></div></div></div>
 
 <section id="encargo"><div class="wrap">
 <h2>Elige el formato <span class="it">de tu obra</span></h2>
@@ -206,6 +259,13 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 <div class="split"><h2>Obras <span class="it">anteriores</span></h2><p>Óleo sobre lienzo, figurativo con una ligera tendencia al expresionismo.</p></div>
 <div class="gal" id="gal"></div></div></section>
 
+<section id="taller"><div class="wrap">
+<div class="taller-top"><div><span class="label">Presencial · Restrepo, Meta</span><h2 style="margin-top:12px">Taller de <span class="it">pintura</span></h2></div>
+<div><p>Aprende a pintar al óleo en un espacio íntimo y creativo. Cupos limitados: escríbeme por WhatsApp para conocer fechas, valor y el próximo taller.</p><a class="btn" id="wataller" target="_blank" rel="noopener" href="#">Preguntar por el próximo taller</a></div></div>
+<div class="tgrid" id="tfotos" aria-label="Fotos de talleres anteriores"></div>
+<div class="tvids" id="tvideos"></div>
+</div></section>
+
 <section class="band" id="resenas"><div class="wrap quotes">
 <blockquote>“Una magnífica obra de arte de la artista Karen Arce. ¡Me encanta!”<cite>François-Pierre Bleau</cite></blockquote>
 <blockquote>“Un trabajo magnífico y talentoso.”<cite>François-Pierre Bleau</cite></blockquote></div></section>
@@ -229,8 +289,14 @@ footer a.s{margin:0 12px;text-decoration:none}footer a.s:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap"><a class="logo" href="#" aria-label="Art By Karen Arce"><i>Art</i><span>BY<b>KAREN</b>ARCE</span></a>
-<a class="s" href="https://instagram.com/by.karenarce" target="_blank" rel="noopener">@by.karenarce</a><a class="s" href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener">art.bykarenarce</a><a class="s" href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener">Artmajeur</a>
+<p class="quote">“El arte se crea desde adentro”</p>
+<div class="fsoc">
+<a href="https://instagram.com/by.karenarce" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+<a href="https://www.tiktok.com/@art.bykarenarce" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 01-3-1.9A4.8 4.8 0 0115.4 2h-3.3v13.4a2.9 2.9 0 11-2-2.8V9.2a6.2 6.2 0 105.3 6.2V8.7a8 8 0 004.7 1.5V6.9a4.8 4.8 0 01-.5-.2z"/></svg></a>
+<a href="https://wa.me/573244733213" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-1.600-.8-2.600-1.400-3.600-3.100-.3-.5.3-.5.8-1.500.1-.2 0-.4 0-.5l-.9-2.100c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.2 2.100 3.300 5.200 4.600 1.900.8 2.700.9 3.600.8.600-.1 1.800-.7 2-1.400.3-.7.3-1.300.2-1.400-.1-.1-.3-.2-.6-.3zM12 21.800c-1.700 0-3.300-.5-4.700-1.300l-3.300.9.9-3.200A9.800 9.800 0 1112 21.800zM12 0C5.400 0 0 5.400 0 12c0 2.100.6 4.200 1.600 6L0 24l6.200-1.600A12 12 0 1012 0z"/></svg></a>
+<a href="https://www.artmajeur.com/karen-arce" target="_blank" rel="noopener" aria-label="Artmajeur"><b>A</b></a></div>
 <p>Pinturas originales al óleo · Colombia · Envíos nacionales e internacionales</p></div></footer>
+<a class="wafab" id="wafab" target="_blank" rel="noopener" href="#" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-1.600-.8-2.600-1.400-3.600-3.100-.3-.5.3-.5.8-1.500.1-.2 0-.4 0-.5l-.9-2.100c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.2 2.100 3.300 5.200 4.600 1.900.8 2.700.9 3.600.8.600-.1 1.800-.7 2-1.400.3-.7.3-1.300.2-1.400-.1-.1-.3-.2-.6-.3zM12 21.800c-1.700 0-3.300-.5-4.700-1.300l-3.300.9.9-3.200A9.800 9.800 0 1112 21.800zM12 0C5.400 0 0 5.400 0 12c0 2.100.6 4.200 1.600 6L0 24l6.200-1.600A12 12 0 1012 0z"/></svg></a>
 <script>
 var CATALOG={
 r:{k:'Retrato al óleo',desc:'Pintado a mano a partir de tu fotografía. Ideal para regalar o conservar un recuerdo.',
@@ -327,7 +393,7 @@ $('gal').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){var f=e.target.c
 (function(){
  var hd=document.querySelector('header'),bg=$('burger');
  var links=[].slice.call(document.querySelectorAll('#secnav a,#mpanel a[href^="#"]'));
- var ids=['encargo','galeria','resenas','sobre','faq'];
+ var ids=['encargo','galeria','taller','resenas','sobre','faq'];
  function setOpen(o){hd.classList.toggle('open',o);bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú')}
  bg.onclick=function(){setOpen(!hd.classList.contains('open'))};
  $('mpanel').addEventListener('click',function(e){if(e.target.closest('a[href^="#"]'))setOpen(false)});
@@ -338,6 +404,23 @@ $('gal').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){var f=e.target.c
   links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)})}
  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(mark)}},{passive:true});
  mark();
+})();
+
+// ===== TALLER: pon aquí tus fotos y videos (si la lista está vacía se ven cuadros de ejemplo) =====
+var TALLER={
+ fotos:[/* 'images/taller1.jpg','images/taller2.jpg','images/taller3.jpg' */],
+ videos:[/* 'videos/taller1.mp4' */]
+};
+(function(){
+ var n=573244733213,t=function(m){return 'https://wa.me/'+n+'?text='+encodeURIComponent(m)};
+ $('wataller').href=t('Hola Karen, quiero información sobre el próximo taller de pintura presencial en Restrepo, Meta.');
+ $('wafab').href=t('Hola Karen, quisiera más información sobre tus pinturas.');
+ var f=TALLER.fotos,box=$('tfotos'),h='';
+ for(var i=0;i<Math.max(f.length,6);i++)h+=f[i]?'<div class="tph has" tabindex="0" role="button" aria-label="Ampliar foto del taller" data-i="'+i+'"><img src="'+f[i]+'" alt="Taller de pintura en Restrepo, Meta" loading="lazy"></div>':'<div class="tph">Foto del taller</div>';
+ box.innerHTML=h;
+ function open(e){var el=e.target.closest('.tph.has');if(el){openLb({t:'Taller de pintura · Restrepo, Meta',imgs:f.slice()});tr.scrollLeft=(+el.dataset.i)*tr.clientWidth;}}
+ box.onclick=open;box.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e)}};
+ $('tvideos').innerHTML=TALLER.videos.map(function(v){return '<div class="tvid"><video src="'+v+'#t=0.1" controls playsinline preload="metadata"></video></div>'}).join('');
 })();
 </script>
 </body>
