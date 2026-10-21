@@ -277,11 +277,14 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
  .about h2{grid-column:2;grid-row:2;align-self:start;margin:0!important;font-size:34px;line-height:36px}
  .about p{grid-column:1/-1;margin-top:14px}
 }
- /* ===== Taller (responsive): botón siempre debajo del párrafo ===== */
+/* ===== Taller (responsive): orden fijo título > párrafo > botón ===== */
 @media(max-width:860px){
- .taller-top>div:last-child{display:flex;flex-direction:column;margin-top:18px}
- .taller-top>div:last-child p{order:1;margin:0 0 22px}
- .taller-top>div:last-child .btn{order:2;margin:0;width:100%}
+ .taller-top{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
+ .taller-top>div,.taller-top>div:last-child{display:contents!important;margin:0!important}
+ .taller-top .label{order:1}
+ .taller-top h2{order:2;margin-bottom:22px}
+ .taller-top p{order:3;margin:0 0 26px}
+ .taller-top .btn{order:4;display:block;width:100%;margin:0}
 }
 </style>
 </head>
