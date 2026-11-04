@@ -286,17 +286,6 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
  .taller-top p{order:3;margin:0 0 26px}
  .taller-top .btn{order:4;display:block;width:100%;margin:0}
 }
- /* ===== Cinta del taller (dos tiras en sentidos opuestos) ===== */
-.cinta{--ch:clamp(150px,19vw,240px);--cg:14px;width:100%;overflow:hidden;margin-top:8px}
-.cinta-row{overflow:hidden;padding:8px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.cinta-track{display:flex;width:max-content;animation:cinta var(--dur,60s) linear infinite;will-change:transform}
-.cinta-row:nth-child(2) .cinta-track{animation-direction:reverse}
-@keyframes cinta{to{transform:translateX(-50%)}}
-.cinta .tph,.cinta .tvid{flex:0 0 auto;height:var(--ch);width:calc(var(--ch)*4/3);aspect-ratio:auto;margin-right:var(--cg)}
-.cinta .tvid{cursor:pointer}.cinta .tvid video{object-fit:cover;pointer-events:none}
-@media (hover:hover){.cinta-row:hover .cinta-track{animation-play-state:paused}}
-@media(max-width:600px){.cinta{--ch:150px;--cg:10px}}
-@media (prefers-reduced-motion:reduce){.cinta-track{animation:none}.cinta-row{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
 </style>
 </head>
 <body>
@@ -359,9 +348,8 @@ footer .wrap>p:last-child{border-top:1px solid rgba(255,255,255,.22);padding-top
     </div>
     <p class="taller-desc">Aprende a pintar con acrílico en un espacio creativo, rodeado de personas que al igual que tú; desean tener nuevas experiencias e intentarlo. Cupos limitados: escríbeme por WhatsApp para conocer fechas, valor y el próximo taller.</p>
   </div>
-<div class="cinta" id="cinta" aria-label="Galería de fotos y videos del taller">
-  <div class="cinta-row"><div class="cinta-track" id="cintaA"></div></div>
-  <div class="cinta-row"><div class="cinta-track" id="cintaB"></div></div>
+  <div class="tgrid" id="tfotos"></div>
+  <div class="tvids" id="tvideos"></div>
 </div></section>
 
 <section class="band" id="resenas"><div class="wrap rev">
@@ -540,39 +528,13 @@ var TALLER={
  var n=573244733213,t=function(m){return 'https://wa.me/'+n+'?text='+encodeURIComponent(m)};
  $('wataller').href=t('Hola Karen, quiero información sobre el próximo taller de pintura presencial en Restrepo, Meta.');
  $('wafab').href=t('Hola Karen, quisiera más información sobre tus pinturas.');
-  var f=TALLER.fotos,v=TALLER.videos,items=[],vi=0,gap=Math.ceil(f.length/(v.length+1))||1;
- f.forEach(function(u,i){items.push({k:'f',u:u,i:i});if(vi<v.length&&(i+1)%gap===0)items.push({k:'v',u:v[vi++]})});
- while(vi<v.length)items.push({k:'v',u:v[vi++]});
- if(!items.length)for(var q=0;q<8;q++)items.push({k:'p'});
- var rows=[[],[]];items.forEach(function(it,k){rows[k%2].push(it)});
- function card(it,dup){var a=dup?' aria-hidden="true" tabindex="-1"':' tabindex="0"';
-  if(it.k==='f')return '<div class="tph has" role="button" data-i="'+it.i+'"'+a+' aria-label="Ampliar foto del taller"><img src="'+it.u+'" alt="Taller de pintura en Restrepo, Meta" loading="lazy" draggable="false"></div>';
-  if(it.k==='v')return '<div class="tvid" role="button" data-v="'+it.u+'"'+a+' aria-label="Ver video del taller"><video src="'+it.u+'#t=0.1" muted loop playsinline autoplay preload="metadata"></video></div>';
-  return '<div class="tph">Foto del taller</div>'}
- function build(){
-  ['cintaA','cintaB'].forEach(function(id,r){
-   var el=$(id),list=rows[r];if(!list.length){el.parentNode.style.display='none';return}
-   var one=list.map(function(it){return card(it,false)}).join('');
-   el.style.animation='none';el.innerHTML=one;
-   var w=el.getBoundingClientRect().width||1,reps=Math.max(1,Math.ceil(innerWidth*1.2/w)),half='',dups='';
-   for(var k=0;k<reps;k++){half+=k?list.map(function(it){return card(it,true)}).join(''):one}
-   for(var k=0;k<reps;k++)dups+=list.map(function(it){return card(it,true)}).join('');
-   el.innerHTML=half+dups;
-   el.style.setProperty('--dur',Math.max(20,Math.round(w*reps/45))+'s');el.style.animation='';
-  })}
- build();var lw=innerWidth,rt;
- addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(innerWidth!==lw){lw=innerWidth;build()}},250)});
- var vb=document.createElement('div');vb.className='lb';vb.setAttribute('role','dialog');vb.setAttribute('aria-modal','true');
- vb.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><video controls playsinline style="max-width:100%;max-height:86vh;border-radius:12px"></video>';
- document.body.appendChild(vb);var vv=vb.querySelector('video');
- function openVid(u){vv.src=u;vb.classList.add('on');document.body.style.overflow='hidden';var pr=vv.play();if(pr&&pr.catch)pr.catch(function(){})}
- function closeVid(){vb.classList.remove('on');vv.pause();vv.removeAttribute('src');vv.load();document.body.style.overflow=''}
- vb.querySelector('.lb-x').onclick=closeVid;vb.onclick=function(e){if(e.target===vb)closeVid()};
- document.addEventListener('keydown',function(e){if(e.key==='Escape'&&vb.classList.contains('on'))closeVid()});
- function abre(e){var c=e.target.closest('[data-i],[data-v]');if(!c)return;
-  if(c.dataset.v!==undefined)return openVid(c.dataset.v);
-  openLb({t:'Taller de pintura · Restrepo, Meta',imgs:f.slice()});tr.scrollLeft=(+c.dataset.i)*tr.clientWidth}
- $('cinta').onclick=abre;$('cinta').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();abre(e)}};
+ var f=TALLER.fotos,box=$('tfotos'),h='';
+ for(var i=0;i<Math.max(f.length,6);i++)h+=f[i]?'<div class="tph has" tabindex="0" role="button" aria-label="Ampliar foto del taller" data-i="'+i+'"><img src="'+f[i]+'" alt="Taller de pintura en Restrepo, Meta" loading="lazy"></div>':'<div class="tph">Foto del taller</div>';
+ box.innerHTML=h;
+ function open(e){var el=e.target.closest('.tph.has');if(el){openLb({t:'Taller de pintura · Restrepo, Meta',imgs:f.slice()});tr.scrollLeft=(+el.dataset.i)*tr.clientWidth;}}
+ box.onclick=open;box.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e)}};
+ $('tvideos').innerHTML=TALLER.videos.map(function(v){return '<div class="tvid"><video src="'+v+'#t=0.1" controls playsinline preload="metadata"></video></div>'}).join('');
+})();
  // ===== Reseñas: agrega más con una línea cada una {q:'texto',a:'nombre'} =====
 var RESENAS=[
  {q:'Una magnífica obra de arte de la artista Karen Arce. ¡Me encanta!',a:'François-Pierre Bleau'},
