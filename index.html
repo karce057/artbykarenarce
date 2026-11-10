@@ -143,6 +143,41 @@ blockquote cite{display:block;margin-top:18px;font:500 12px 'Instrument Sans',sa
 .lb button:hover{background:rgba(255,255,255,.28)}
 .lb-x{top:16px;right:16px}.lb-prev{left:12px}.lb-next{right:12px}
 @media(max-width:700px){.lb-prev,.lb-next{display:none}}
+
+/* ===== Ficha de la obra dentro del visor ===== */
+.lb-main{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;min-height:0;min-width:0;width:100%}
+.lb-info{display:none}
+.lb.has-info{flex-direction:row;align-items:stretch;justify-content:center;gap:24px;padding:24px}
+.lb.has-info .lb-main{width:auto}
+.lb.has-info .lb-info{display:flex;flex-direction:column;flex:0 0 clamp(340px,34vw,420px);background:var(--paper);color:var(--ink);border-radius:22px;padding:34px 30px 26px;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.lb.has-info .lb-x{background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.35);top:34px;right:34px;width:40px;height:40px}
+.lb.has-info .lb-x:hover{background:var(--bg)}
+.lb.has-info .lb-cap{font-size:0;padding-top:8px}
+.lb.has-info .lb-cap small{font-size:13px;margin:0}
+.li-eyebrow{padding-right:46px}
+.li-title{font:italic 400 clamp(30px,3vw,40px)/1.05 'Instrument Serif',Georgia,serif;margin:10px 0 18px;letter-spacing:-.01em}
+.li-desc{white-space:pre-line;font-size:16px;line-height:1.65;color:var(--ink);margin:0}
+.li-meta{margin:22px 0 0;padding:18px 0 0;border-top:1px solid var(--line);font-size:15px;line-height:1.55;color:var(--soft);display:grid;gap:3px}
+.li-meta b{color:var(--ink);font-weight:600}
+.li-note{font-size:13px;line-height:1.5;color:var(--soft);margin:18px 0 0}
+.li-buy{margin-top:auto;padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.li-price{font:400 clamp(30px,3vw,40px)/1 'Instrument Serif',Georgia,serif;white-space:nowrap;letter-spacing:-.01em}
+.li-price.ask{font-size:24px;font-style:italic;color:var(--soft)}
+.li-sold{font:600 13px 'Instrument Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--line);background:var(--bg);padding:10px 18px;border-radius:40px}
+.li-buy .btn{flex:1;max-width:220px;padding:14px 18px;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.work .sold-tag{position:absolute;top:10px;left:10px;background:var(--paper);color:var(--ink);font:600 11px 'Instrument Sans',sans-serif;letter-spacing:.18em;padding:5px 11px;border-radius:20px;pointer-events:none;box-shadow:0 2px 8px rgba(18,16,43,.25)}
+@media(max-width:800px){
+ .lb.on.has-info{display:block;padding:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ .lb.has-info .lb-main{height:64vh;height:64svh;width:100%;padding:62px 12px 10px}
+ .lb.has-info .lb-thumbs img{width:46px;height:58px}
+ .lb.has-info .lb-info{display:flex;flex:none;border-radius:26px 26px 0 0;padding:26px 22px 0;min-height:42vh;min-height:42svh;overflow:visible;box-shadow:none}
+ .lb.has-info .lb-x{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;width:44px;height:44px}
+ .li-title{font-size:32px}
+ .li-buy{position:sticky;bottom:0;margin:22px -22px 0;padding:14px 22px calc(14px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--line);z-index:2}
+ .li-buy .btn{max-width:none}
+ .li-price{font-size:30px}
+}
 .about{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
 .about img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:200px 200px 24px 24px}
 .about p{margin:18px 0 0;color:var(--soft)}
@@ -450,36 +485,79 @@ $('sizes').onclick=function(e){var i=e.target.dataset.i;if(i===undefined)return;
 $('extra').onchange=function(){st.x=this.checked;render()};
 render();
 // Galería agrupada por cuadro: la primera foto es la portada y las demás son detalles/adicionales
+// ============================================================
+//  GALERÍA — edita aquí la ficha de cada obra
+//  t      -> título que aparece bajo la miniatura (no cambia)
+//  imgs   -> fotos de la obra (la primera es la portada)
+//  info   -> ficha que se abre al lado de la foto:
+//     title  : título completo (opcional, si no usa "t")
+//     desc   : descripción / poema. Los saltos de línea se respetan
+//     size   : tamaño        tech : técnica
+//     place  : lugar         date : fecha
+//     price  : precio como texto, ej. "$ 2'000.000"  (si lo dejas vacío muestra "Consultar valor")
+//     sold   : true  -> muestra SOLD y cambia el botón a "Encargar una similar"
+//  Los campos vacíos ('') simplemente no se muestran.
+// ============================================================
 var GALLERY=[
- {t:'Mirada al interior - Óleo 100x60', imgs:['images/obra 1.jpg','images/obra 1-2.jpg']},
- {t:'Beso por consumar - Óleo 70x100', imgs:['images/obra 2.jpg','images/obra 2-1.jpg','images/obra 2-3.jpg']},
- {t:'Virgen de Guadalupe - Óleo 40x60', imgs:['images/obra 3.jpg','images/obra 3-1.jpg','images/obra 3-2.jpg','images/obra 3-3.jpg']},
- {t:'Take off - Óleo 40x60', imgs:['images/obra 4.jpg','images/obra 4-1.jpg']},
- {t:'Enciente tu alma - Óleo 40x60', imgs:['images/obra 5.jpg','images/obra 5-3.jpg']},
- {t:'Rouge Triología - Óleo 30x50', imgs:['images/obra 6.jpg']},
- {t:'Blanc Triología - Óleo 30x50', imgs:['images/obra 7.jpg','images/obra 7-1.jpg']},
- {t:'Bleu Triología - Óleo 30x50', imgs:['images/obra 8.jpg','images/obra 8-1.jpg']},
- {t:'Calma y preocupación - Óleo 20x30', imgs:['images/obra 9.jpg']},
- {t:'Envuelta en color - Óleo 40x50', imgs:['images/obra 10.jpg']},
- {t:'Autoretratos - Lápiz', imgs:['images/obra 11.jpg','images/obra 12.jpg']},
- {t:'Angel - Óleo 1/8', imgs:['images/obra 13-1.jpg','images/obra 13-2.jpg']},
- {t:'Jero - Carboncillo 1/4', imgs:['images/obra 14.jpg']},
- {t:'Mom - Digital 35x50', imgs:['images/obra 17.png']}
+ {t:'Mirada al interior - Óleo 100x60', imgs:['images/obra 1.jpg','images/obra 1-2.jpg'],
+  info:{desc:'', size:'100x60 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Beso por consumar - Óleo 70x100', imgs:['images/obra 2.jpg','images/obra 2-1.jpg','images/obra 2-3.jpg'],
+  info:{desc:'', size:'70x100 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Virgen de Guadalupe - Óleo 40x60', imgs:['images/obra 3.jpg','images/obra 3-1.jpg','images/obra 3-2.jpg','images/obra 3-3.jpg'],
+  info:{desc:'', size:'40x60 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Take off - Óleo 40x60', imgs:['images/obra 4.jpg','images/obra 4-1.jpg'],
+  info:{desc:'', size:'40x60 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Enciente tu alma - Óleo 40x60', imgs:['images/obra 5.jpg','images/obra 5-3.jpg'],
+  info:{title:'Enciende tu alma',
+   desc:'Libera tu mente.\nEs la búsqueda incesante por seguir tu instinto y vocación.\nCuando dejas de lado todo lo que la mente sobre piensa, boicotea y se rehusa por miedo a lo desconocido.\nEnciendes tu alma!\nSobresale de tu pecho un brillo y un clamor ardiente que aviva tu corazón.\nEntonces,\nLe das cabida a las cosas que te apasionan, aún con el temor, la vulnerabilidad y la exposición misma que esto causa.\nIntentas creer un día y te das cuenta que es soltando o eliminando tu mente del juego, al menos para tomar esa decisión.\nQue llegas por fin a florecer.',
+   size:'Lienzo de 40x50 cm', tech:'Óleo', place:'Restrepo, Meta', date:'Febrero 2026', price:"$ 2'000.000", sold:false}},
+ {t:'Rouge Triología - Óleo 30x50', imgs:['images/obra 6.jpg'],
+  info:{desc:'', size:'30x50 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Blanc Triología - Óleo 30x50', imgs:['images/obra 7.jpg','images/obra 7-1.jpg'],
+  info:{desc:'', size:'30x50 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Bleu Triología - Óleo 30x50', imgs:['images/obra 8.jpg','images/obra 8-1.jpg'],
+  info:{desc:'', size:'30x50 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Calma y preocupación - Óleo 20x30', imgs:['images/obra 9.jpg'],
+  info:{desc:'', size:'20x30 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Envuelta en color - Óleo 40x50', imgs:['images/obra 10.jpg'],
+  info:{desc:'', size:'40x50 cm', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Autoretratos - Lápiz', imgs:['images/obra 11.jpg','images/obra 12.jpg'],
+  info:{desc:'', size:'', tech:'Lápiz', place:'', date:'', price:'', sold:false}},
+ {t:'Angel - Óleo 1/8', imgs:['images/obra 13-1.jpg','images/obra 13-2.jpg'],
+  info:{desc:'', size:'1/8', tech:'Óleo', place:'', date:'', price:'', sold:false}},
+ {t:'Jero - Carboncillo 1/4', imgs:['images/obra 14.jpg'],
+  info:{desc:'', size:'1/4', tech:'Carboncillo', place:'', date:'', price:'', sold:false}},
+ {t:'Mom - Digital 35x50', imgs:['images/obra 17.png'],
+  info:{desc:'', size:'35x50 cm', tech:'Digital', place:'', date:'', price:'', sold:false}}
 ];
 var h=['4/5','1/1','3/4','4/5','5/4','3/4'];
 $('gal').innerHTML=(GALLERY.length?GALLERY:h.map(function(a,n){return{ph:a,t:'Obra '+(n+1)}})).map(function(w,k){
  if(!w.imgs)return '<figure class="work"><div class="ph" style="aspect-ratio:'+w.ph+'">Próximamente</div></figure>';
- return '<figure class="work" data-k="'+k+'" tabindex="0" role="button" aria-label="Ver '+w.t+'"><img loading="lazy" src="'+w.imgs[0]+'" alt="'+w.t+'">'+(w.imgs.length>1?'<span class="cnt">1/'+w.imgs.length+'</span>':'')+'<figcaption><b>'+w.t+'</b></figcaption></figure>'}).join('');
+ return '<figure class="work" data-k="'+k+'" tabindex="0" role="button" aria-label="Ver '+w.t+'"><img loading="lazy" src="'+w.imgs[0]+'" alt="'+w.t+'">'+(w.imgs.length>1?'<span class="cnt">1/'+w.imgs.length+'</span>':'')+(w.info&&w.info.sold?'<span class="sold-tag">SOLD</span>':'')+'<figcaption><b>'+w.t+'</b></figcaption></figure>'}).join('');
 
 // Visor ampliado con deslizamiento entre fotos del mismo cuadro
 var lb=document.createElement('div');lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');
-lb.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><div class="lb-stage"><button class="lb-prev" aria-label="Anterior">&#8249;</button><div class="lb-track"></div><button class="lb-next" aria-label="Siguiente">&#8250;</button></div><div class="lb-cap"></div><div class="lb-thumbs"></div>';
+lb.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><div class="lb-main"><div class="lb-stage"><button class="lb-prev" aria-label="Anterior">&#8249;</button><div class="lb-track"></div><button class="lb-next" aria-label="Siguiente">&#8250;</button></div><div class="lb-cap"></div><div class="lb-thumbs"></div></div><aside class="lb-info" aria-label="Información de la obra"></aside>';
 document.body.appendChild(lb);
-var tr=lb.querySelector('.lb-track'),cap=lb.querySelector('.lb-cap'),th=lb.querySelector('.lb-thumbs'),cur=null;
-function mark(){var n=Math.round(tr.scrollLeft/tr.clientWidth);cap.innerHTML=cur.t+(cur.imgs.length>1?'<small>'+(n+1)+' / '+cur.imgs.length+'</small>':'');
+var tr=lb.querySelector('.lb-track'),cap=lb.querySelector('.lb-cap'),th=lb.querySelector('.lb-thumbs'),inf=lb.querySelector('.lb-info'),cur=null;
+function mark(){var n=Math.round(tr.scrollLeft/tr.clientWidth);cap.innerHTML=(cur.info?'':cur.t)+(cur.imgs.length>1?'<small>'+(n+1)+' / '+cur.imgs.length+'</small>':'');
  [].forEach.call(th.children,function(e,m){e.classList.toggle('on',m===n)})}
 function go(n){tr.scrollTo({left:n*tr.clientWidth,behavior:'smooth'})}
-function openLb(k){cur=(typeof k==='object')?k:GALLERY[k];
+function esc(v){return String(v==null?'':v).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function renderInfo(w){var i=w.info;lb.classList.toggle('has-info',!!i);
+ if(!i){inf.innerHTML='';return}
+ var title=i.title||w.t,
+  rows=[['Tamaño',i.size],['Técnica',i.tech],['Lugar',i.place],['Fecha',i.date]].filter(function(r){return r[1]}).map(function(r){return '<span><b>'+r[0]+':</b> '+esc(r[1])+'</span>'}).join(''),
+  price=i.sold?'<span class="li-sold">SOLD</span>':(i.price?'<span class="li-price">'+esc(i.price)+'</span>':'<span class="li-price ask">Consultar valor</span>'),
+  msg=i.sold?'Hola Karen, vi la obra "'+title+'" y me gustaría encargar algo similar.':'Hola Karen, me interesa la obra "'+title+'"'+(i.price?' ('+i.price+')':'')+'. ¿Sigue disponible?',
+  txt=i.sold?'Encargar una similar':(i.price?'Comprar por WhatsApp':'Consultar por WhatsApp');
+ inf.innerHTML='<div class="li-body"><div class="label li-eyebrow">Obra original</div><h3 class="li-title">'+esc(title)+'</h3>'
+  +(i.desc?'<p class="li-desc">'+esc(i.desc)+'</p>':'')
+  +(rows?'<div class="li-meta">'+rows+'</div>':'')
+  +(i.sold?'':'<p class="li-note">El packing está incluido en el valor de la obra. El envío se cotiza según la ciudad o el país y lo asume el cliente.</p>')+'</div>'
+  +'<div class="li-buy">'+price+'<a class="btn'+(i.sold?' ghost':'')+'" target="_blank" rel="noopener" href="https://wa.me/573244733213?text='+encodeURIComponent(msg)+'">'+txt+'</a></div>';
+ inf.scrollTop=0}
+function openLb(k){cur=(typeof k==='object')?k:GALLERY[k];renderInfo(cur);lb.scrollTop=0;
  tr.innerHTML=cur.imgs.map(function(u){return '<img src="'+u+'" alt="'+cur.t+'" draggable="false">'}).join('');
  th.innerHTML=cur.imgs.length>1?cur.imgs.map(function(u,m){return '<img src="'+u+'" data-n="'+m+'" alt="">'}).join(''):'';
  lb.querySelector('.lb-prev').style.display=lb.querySelector('.lb-next').style.display=cur.imgs.length>1?'':'none';
@@ -490,7 +568,7 @@ th.onclick=function(e){if(e.target.dataset.n)go(+e.target.dataset.n)};
 lb.querySelector('.lb-x').onclick=closeLb;
 lb.querySelector('.lb-prev').onclick=function(){go(Math.max(0,Math.round(tr.scrollLeft/tr.clientWidth)-1))};
 lb.querySelector('.lb-next').onclick=function(){go(Math.min(cur.imgs.length-1,Math.round(tr.scrollLeft/tr.clientWidth)+1))};
-lb.onclick=function(e){if(e.target===lb||e.target===tr||e.target.classList.contains('lb-stage'))closeLb()};
+lb.onclick=function(e){if(e.target===lb||e.target===tr||e.target.classList.contains('lb-stage')||e.target.classList.contains('lb-main'))closeLb()};
 document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;
  if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lb.querySelector('.lb-prev').click();if(e.key==='ArrowRight')lb.querySelector('.lb-next').click()});
 function abreFormato(){var ph=$('fph');if(!ph.classList.contains('has'))return;var g=CATALOG[st.t],z=g.sizes[st.i];openLb({t:g.k+' · '+z.s,imgs:[].concat(FOTOS[z.s])})}
